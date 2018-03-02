@@ -11,7 +11,7 @@ View your Output
 ```bash
 masternode outputs
 
-Write this down or copy it somewhere safe. 
+Write this down or copy it somewhere safe.
 ```
 
 SSH (Putty Suggested) to your VPS, login to root, and clone the Github repository:
@@ -25,18 +25,18 @@ Navigate to the install folder:
 cd Bulwark-MN-Install
 ```
 
-Install & configure your desired master node with options. The command you use depends on your version of Ubuntu. 
+Install & configure your desired master node with options. The command you use depends on your version of Ubuntu.
 
 For Ubuntu 14.04:
 
 ```bash
-bash install_ubuntu_14.04.sh 
+bash install_ubuntu_14.04.sh
 ```
 
 For Ubuntu 16.04:
 
 ```bash
-bash install_ubuntu_16.04.sh 
+bash install_ubuntu_16.04.sh
 ```
 
 For Ubuntu 17.10:
@@ -62,7 +62,7 @@ Open up the local wallet, unlock with your encryption password, and open up the 
 ```bash
 startmasternode alias false <masternodename>
 ```
-If done correctly, it will indicate that the masternode has been started correctly. 
+If done correctly, it will indicate that the masternode has been started correctly.
 
 Go back to your VPS and hit the spacebar. It will say that it needs to sync. You're all done!
 
@@ -77,3 +77,13 @@ rm -rf Bulwark-MN-Install && git clone https://github.com/bulwark-crypto/Bulwark
 ```
 
 No other attention is required.
+
+## Updating Node
+
+To update your node please run this from root ~ and follow the instructions:
+
+```
+cd Bulwark-MN-Install
+git pull
+bash update-mn.sh
+```
