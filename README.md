@@ -116,3 +116,15 @@ To update your node please run this from root ~ and follow the instructions:
 ```
 cd Bulwark-MN-Install && git pull && bash update_node.sh
 ```
+
+When uptdating your node, it's possible that you'll see the following error message:
+
+> *** Please tell me who you are.
+
+In that case, please run the following line and try again:
+
+```
+git config --global user.email "EMAIL" && git config --global user.name "NAME"
+```
+
+Make sure to replace EMAIL and NAME with your mail address and name.
