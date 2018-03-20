@@ -100,6 +100,16 @@ bind='$ip':52543
 masternodeaddr='$ip'
 masternodeprivkey='$key'
 masternode=1
+addnode=bwk1.masterhash.us:52543
+addnode=bwk2.masterhash.us:52543
+addnode=bwk3.masterhash.us:52543
+addnode=bwk4.masterhash.us:52543
+addnode=bwk5.masterhash.us:52543
+addnode=bwk6.masterhash.us:52543
+addnode=bwk7.masterhash.us:52543
+addnode=bwk8.masterhash.us:52543
+addnode=bwk9.masterhash.us:52543
+addnode=bwk10.masterhash.us:52543
 ' | sudo -E tee ~/.bulwark/bulwark.conf >/dev/null 2>&1
 sudo chmod 0600 ~/.bulwark/bulwark.conf
 
