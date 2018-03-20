@@ -2,9 +2,9 @@
 clear
 
 # Set these to change the version of Bulwark to install
-TARBALLURL="https://github.com/bulwark-crypto/Bulwark/releases/download/1.2.2/bulwark-1.2.2.0-linux64.tar.gz"
-TARBALLNAME="bulwark-1.2.2.0-linux64.tar.gz"
-BWKVERSION="1.2.2.0"
+TARBALLURL="https://github.com/bulwark-crypto/Bulwark/releases/download/1.2.3/bulwark-1.2.3.0-linux64.tar.gz"
+TARBALLNAME="bulwark-1.2.3.0-linux64.tar.gz"
+BWKVERSION="1.2.3.0"
 
 STRING1="Make sure you double check before hitting enter! Only one shot at these!"
 STRING2="If you found this helpful, please donate to BWK Donation: "
