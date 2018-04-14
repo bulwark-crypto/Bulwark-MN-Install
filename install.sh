@@ -27,19 +27,44 @@ EXTERNALIP=`dig +short myip.opendns.com @resolver1.opendns.com`
 clear
 
 cat  << EOF
+  ______  _     _ _      _  _  _       ______  _    _
+ (____  \| |   | | |    | || || |  /\ (_____ \| |  / )
+  ____)  ) |   | | |    | || || | /  \ _____) ) | / /
+ |  __  (| |   | | |    | ||_|| |/ /\ (_____ (| |< <
+ | |__)  ) |___| | |____| |___| | |__| |    | | | \ \
+ |______/ \______|_______)______|______|    |_|_|  \_)
 
- ################################# PLEASE READ ################################
+              MASTERNODE INSTALLER v2
+EOF
+sleep 2
 
-    You can choose between two installation options: default and advanced.
-
- The advanced installation will install and run the masternode under a non-root
- user. If you don't know what that means, use the default installation method.
- Otherwise, your masternode will not work, and the Bulwark Team CANNOT assist
- you in repairing it. You will have to start over.
-
-    Don't use the advanced option unless you are an experienced Linux user.
-
- ##############################################################################
+cat << EOF
+    ___T_
+   | o o |
+   |__-__|
+   /| []|\
+ ()/|___|\()
+    |_|_|
+    /_|_\  ----------------------------------------+
+ |                                                |
+ |You can choose between two installation options:|::
+ |             default and advanced.              |::
+ |                                                |::
+ | The advanced installation will install and run |::
+ |  the masternode under a non-root user. If you  |::
+ |  don't know what that means, use the default   |::
+ |              installation method.              |::
+ |                                                |::
+ | Otherwise, your masternode will not work, and  |::
+ |the Bulwark Team CANNOT assist you in repairing |::
+ |        it. You will have to start over.        |::
+ |                                                |::
+ |Don't use the advanced option unless you are an |::
+ |            experienced Linux user.             |::
+ |                                                |::
+ |                                                |::
+ +------------------------------------------------+::
+   ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 EOF
 
@@ -77,22 +102,23 @@ RPCUSER=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)
 RPCPASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
 # update packages and upgrade Ubuntu
-apt-get -y update
-apt-get -y upgrade
-apt-get -y autoremove
-apt-get -y install wget htop unzip
-apt-get -y install build-essential && apt-get -y install libtool autotools-dev autoconf automake && apt-get -y install libssl-dev && apt-get -y install libboost-all-dev && apt-get -y install software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin && apt update && apt-get -y install libdb4.8-dev && apt-get -y install libdb4.8++-dev && apt-get -y install libminiupnpc-dev && apt-get -y install libqt4-dev libprotobuf-dev protobuf-compiler && apt-get -y install libqrencode-dev && apt-get -y install git && apt-get -y install pkg-config apt-get -y install libzmq3-dev
-apt-get -y install aptitude
+echo "Installing dependencies..."
+apt-get -qq update
+apt-get -qq upgrade
+apt-get -qq autoremove
+apt-get -qq install wget htop unzip
+apt-get -qq install build-essential && apt-get -qq install libtool autotools-dev autoconf automake && apt-get -qq install libssl-dev && apt-get -qq install libboost-all-dev && apt-get -qq install software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin && apt update && apt-get -qq install libdb4.8-dev && apt-get -qq install libdb4.8++-dev && apt-get -qq install libminiupnpc-dev && apt-get -qq install libqt4-dev libprotobuf-dev protobuf-compiler && apt-get -qq install libqrencode-dev && apt-get -qq install git && apt-get -qq install pkg-config apt-get -qq install libzmq3-dev
+apt-get -qq install aptitude
 
 # Install Fail2Ban
 if [[ ("$FAIL2BAN" == "y" || "$FAIL2BAN" == "Y" || "$FAIL2BAN" == "") ]]; then
-  aptitude -y install fail2ban
+  aptitude -y -q install fail2ban
   service fail2ban restart
 fi
 
 # Install UFW
 if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-  apt-get -y install ufw
+  apt-get -qq install ufw
   ufw default deny incoming
   ufw default allow outgoing
   ufw allow ssh
