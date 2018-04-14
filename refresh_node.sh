@@ -37,4 +37,21 @@ else
   su -c "bulwarkd -daemon" $USER
 fi
 
+echo "Your masternode is syncing. Please wait for this process to finish."
+echo "This can take up to a few hours. Do not close this window." && echo ""
+
+until su -c "bulwark-cli startmasternode local false 2>/dev/null | grep 'successfully started' > /dev/null" $USER; do
+  for (( i=0; i<${#CHARS}; i++ )); do
+    sleep 2
+    echo -en "${CHARS:$i:1}" "\r"
+  done
+done
+
+sleep 1
+su -c "/usr/local/bin/bulwark-cli startmasternode local false" $USER
+sleep 1
+clear
+su -c "/usr/local/bin/bulwark-cli masternode status" $USER
+sleep 5
+
 echo "" && echo "Masternode refresh completed." && echo ""
