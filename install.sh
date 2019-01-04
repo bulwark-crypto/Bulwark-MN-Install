@@ -360,7 +360,7 @@ if [[ ("$I2P" == "y" || "$I2P" == "Y") ]]; then
   cat > /etc/systemd/system/kovri.service << EOL
 [Unit]
 Description=Kovri I2P
-After=network.target
+After=network-online.target
 [Service]
 Type=simple
 User=${USER}
@@ -483,7 +483,7 @@ sleep 1
 cat > /etc/systemd/system/bulwarkd.service << EOL
 [Unit]
 Description=Bulwarks's distributed currency daemon
-After=network.target
+After=network-online.target
 [Service]
 Type=forking
 User=${USER}
