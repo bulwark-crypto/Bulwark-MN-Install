@@ -79,6 +79,7 @@ sleep 10
 
 rm -f /usr/local/bin/bulwarkupdate
 curl -o /usr/local/bin/bulwarkupdate https://raw.githubusercontent.com/bulwark-crypto/Bulwark-MN-Install/master/bulwarkupdate
+chmod a+x /usr/local/bin/bulwarkupdate
 
 if ! systemctl status bulwarkd | grep -q "active (running)"; then
   echo "ERROR: Failed to start bulwarkd. Please contact support."
