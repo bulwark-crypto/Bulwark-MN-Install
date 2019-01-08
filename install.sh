@@ -512,9 +512,10 @@ fi
 echo "Installing Bulwark Autoupdater..."
 rm -f /usr/local/bin/bulwarkupdate
 curl -o /usr/local/bin/bulwarkupdate https://raw.githubusercontent.com/bulwark-crypto/Bulwark-MN-Install/master/bulwarkupdate
+chmod a+x /usr/local/bin/bulwarkupdate
 
 if [ ! -f /etc/systemd/system/bulwarkupdate.service ]; then
-cat > /etc/systemd/system/bulwarkd.service << EOL
+cat > /etc/systemd/system/bulwarkupdate.service << EOL
 [Unit]
 Description=Bulwarks's Masternode Autoupdater
 After=network-online.target
@@ -527,7 +528,7 @@ EOL
 fi
 
 if [ ! -f /etc/systemd/system/bulwarkupdate.timer ]; then
-cat > /etc/systemd/system/bulwarkd.timer << EOL
+cat > /etc/systemd/system/bulwarkupdate.timer << EOL
 [Unit]
 Description=Bulwarks's Masternode Autoupdater Timer
 
