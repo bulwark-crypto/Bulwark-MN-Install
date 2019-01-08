@@ -4,7 +4,7 @@ TARBALLURL=$(curl -s https://api.github.com/repos/bulwark-crypto/bulwark/release
 TARBALLNAME=$(curl -s https://api.github.com/repos/bulwark-crypto/bulwark/releases/latest | grep browser_download_url | grep -e "bulwark-node.*linux64" | cut -d '"' -f 4 | cut -d "/" -f 9)
 BWKVERSION=$(curl -s https://api.github.com/repos/bulwark-crypto/bulwark/releases/latest | grep browser_download_url | grep -e "bulwark-node.*linux64" | cut -d '"' -f 4 | cut -d "/" -f 8)
 
-LOCALVERSION=$(bulwark-cli --version)
+LOCALVERSION=$(bulwark-cli --version | cut -d " " -f 6)
 REMOTEVERSION=$(curl -s https://api.github.com/repos/bulwark-crypto/bulwark/releases/latest | jq -r ".tag_name")
 
 if [[ "$LOCALVERSION" = "$REMOTEVERSION" ]]; then
