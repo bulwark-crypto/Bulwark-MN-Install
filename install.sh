@@ -161,7 +161,7 @@ systemctl --version >/dev/null 2>&1 || { echo "systemd is required. Are you usin
 IPV4=$(dig +short myip.opendns.com @resolver1.opendns.com)
 IPV6=$(dig +short -6 myip.opendns.com aaaa @resolver1.ipv6-sandbox.opendns.com)
 if [ -z "$EXTERNALIP" ]; then
-  if [ ! -z "$IPV4" ]; then
+  if [ -n "$IPV4" ]; then
     EXTERNALIP="$IPV4"
   else
     EXTERNALIP="$IPV6"
@@ -272,7 +272,7 @@ if [[ "$I2PREADY" == "y" && "$TOR" != "y" && "$TOR" != "Y" && "$I2P" != "y" && "
         ;;
     esac
   done
-elif [[ "$I2PREADY" == 'n' && -z "$TOR" && -z "$I2P" && ! -z "$IPV4" ]]; then
+elif [[ "$I2PREADY" == 'n' && -z "$TOR" && -z "$I2P" && -n "$IPV4" ]]; then
   read -erp "Would you like to use bulwarkd via TOR? [y/N] : " TOR
 fi
 
