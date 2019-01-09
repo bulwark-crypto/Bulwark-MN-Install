@@ -48,7 +48,7 @@ else
   su -c "bulwarkd -daemon" "$USER"
 fi
 
-sleep 10
+sleep 20
 
 clear
 

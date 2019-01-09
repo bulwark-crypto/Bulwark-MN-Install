@@ -85,7 +85,7 @@ EOL
 sudo systemctl enable bulwarkd
 sudo systemctl start bulwarkd
 
-sleep 10
+sleep 20
 
 clear
 
