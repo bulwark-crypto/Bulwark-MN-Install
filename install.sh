@@ -110,7 +110,7 @@ clear
 
 # Make sure curl is installed
 apt-get update
-apt-get install -qqy curl
+apt-get install -qqy curl jq
 clear
 
 # These should automatically find the latest version of Bulwark
