@@ -75,7 +75,7 @@ EOL
 sudo systemctl enable bulwarkd
 sudo systemctl start bulwarkd
 
-sleep 10
+sleep 20
 
 rm -f /usr/local/bin/bulwarkupdate
 curl -o /usr/local/bin/bulwarkupdate https://raw.githubusercontent.com/bulwark-crypto/Bulwark-MN-Install/master/bulwarkupdate

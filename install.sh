@@ -502,7 +502,7 @@ systemctl enable bulwarkd
 echo "Starting bulwarkd..."
 systemctl start bulwarkd
 
-sleep 10
+sleep 20
 
 if ! systemctl status bulwarkd | grep -q "active (running)"; then
   echo "ERROR: Failed to start bulwarkd. Please contact support."
