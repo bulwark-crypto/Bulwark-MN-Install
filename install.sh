@@ -499,7 +499,7 @@ StartLimitBurst=3
 WantedBy=multi-user.target
 EOL
 systemctl enable bulwarkd
-echo "Starting bulwarkd..."
+echo "Starting bulwarkd, will check status in 20 seconds..."
 systemctl start bulwarkd
 
 sleep 20

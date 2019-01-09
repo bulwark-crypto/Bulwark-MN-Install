@@ -48,6 +48,7 @@ else
   su -c "bulwarkd -daemon" "$USER"
 fi
 
+echo "Starting bulwarkd, will check status in 20 seconds..."
 sleep 20
 
 clear
