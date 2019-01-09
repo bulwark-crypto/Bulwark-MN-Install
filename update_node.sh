@@ -85,8 +85,8 @@ EOL
 sudo systemctl enable bulwarkd
 sudo systemctl start bulwarkd
 
-echo "Starting bulwarkd, will check status in 20 seconds..."
-sleep 20
+echo "Starting bulwarkd, will check status in 60 seconds..."
+sleep 60
 
 clear
 

@@ -499,10 +499,10 @@ StartLimitBurst=3
 WantedBy=multi-user.target
 EOL
 systemctl enable bulwarkd
-echo "Starting bulwarkd, will check status in 20 seconds..."
+echo "Starting bulwarkd, will check status in 60 seconds..."
 systemctl start bulwarkd
 
-sleep 20
+sleep 60
 
 if ! systemctl status bulwarkd | grep -q "active (running)"; then
   echo "ERROR: Failed to start bulwarkd. Please contact support."
