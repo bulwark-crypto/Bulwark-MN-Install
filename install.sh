@@ -11,10 +11,15 @@ do
 key="$1"
 
 case $key in
+    --no-bitcoind)
+    BITCOIND="n"
+    shift
+    ;;
     -a|--advanced)
     ADVANCED="y"
     shift
     ;;
+    
     -n|--normal)
     ADVANCED="n"
     FAIL2BAN="y"
@@ -85,10 +90,11 @@ Bulwark Masternode installer arguments:
     --bindip <address>        : Internal bind IP to use
     -k --privatekey <key>     : Private key to use
     -f --fail2ban             : Install Fail2Ban
-    --no-fail2ban             : Do nott install Fail2Ban
+    --no-fail2ban             : Do not install Fail2Ban
     -u --ufw                  : Install UFW
     --no-ufw                  : Do not install UFW
     -b --bootstrap            : Sync node using Bootstrap
+    --no-bitcoind             : Do not Install bitcoind
     --no-bootstrap            : Do not use Bootstrap
     -h --help                 : Display this help text.
     --no-interaction          : Do not wait for wallet activation.
@@ -298,8 +304,35 @@ apt-get -qq update
 apt-get -qq upgrade
 apt-get -qq autoremove
 apt-get -qq install wget htop xz-utils
-apt-get -qq install build-essential && apt-get -qq install libtool autotools-dev autoconf automake && apt-get -qq install libssl-dev && apt-get -qq install libboost-all-dev && apt-get -qq install software-properties-common && add-apt-repository -y ppa:bitcoin/bitcoin && apt update && apt-get -qq install libdb4.8-dev && apt-get -qq install libdb4.8++-dev && apt-get -qq install libminiupnpc-dev && apt-get -qq install libqt4-dev libprotobuf-dev protobuf-compiler && apt-get -qq install libqrencode-dev && apt-get -qq install git && apt-get -qq install pkg-config && apt-get -qq install libzmq3-dev
+apt-get -qq install build-essential && apt-get -qq install libtool autotools-dev autoconf automake && apt-get -qq install libssl-dev && apt-get -qq install libboost-all-dev && apt-get -qq install libdb4.8-dev && apt-get -qq install libdb4.8++-dev && apt-get -qq install libminiupnpc-dev && apt-get -qq install libqt4-dev libprotobuf-dev protobuf-compiler && apt-get -qq install libqrencode-dev && apt-get -qq install git && apt-get -qq install pkg-config && apt-get -qq install libzmq3-dev
 apt-get -qq install aptitude
+# Install bitcoind
+if [ "$BITCOIND" == "y" ]; then
+  echo "Installing bitcoin core over snap"
+  snap install bitcoin-core
+fi
+#Set up bitcoin
+if [ ! -f /etc/systemd/system/bitcoind.service ]; then
+  cat > /etc/systemd/system/bitcoind.service << EOL
+[Unit]
+Description=Bitcoin daemon
+After=network.target
+[Service]
+User=root
+Group=root
+Type=forking
+PIDFile=/root/.bitcoin/bitcoind.pid
+ExecStart=/snap/bin/bitcoin-core.daemon -pid=/root/.bitcoin/bitcoind.pid
+KillMode=process
+Restart=always
+TimeoutSec=120
+RestartSec=30
+[Install]
+WantedBy=multi-user.target
+EOL
+  mkdir /root/.bitcoin
+  systemctl enable --now bitcoind
+fi
 
 # Install Fail2Ban
 if [[ ("$FAIL2BAN" == "y" || "$FAIL2BAN" == "Y" || "$FAIL2BAN" == "") ]]; then
